@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# git+git://github.com/Sheeprider/BitBucket-api.git
+# git+git://github.com/kubilayeksioglu/BitBucket-api.git
 
 __all__ = ['Bitbucket', ]
 
@@ -44,8 +44,9 @@ URLS = {
 
 class Bitbucket(object):
     """ This class lets you interact with the bitbucket public API. """
-    def __init__(self, username='', password='', repo_name_or_slug=''):
+    def __init__(self, username='', password='', repo_name_or_slug='', auth_username=''):
         self.username = username
+        self.auth_username = auth_username or username
         self.password = password
         self.repo_slug = repo_name_or_slug
         self.repo_tree = {}
@@ -72,7 +73,7 @@ class Bitbucket(object):
         """ Return credentials for current Bitbucket user. """
         if self.oauth:
             return self.oauth
-        return (self.username, self.password)
+        return (self.auth_username, self.password)
 
     @property
     def username(self):
